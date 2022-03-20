@@ -49,7 +49,7 @@ public class Pessoa {
 	@Column(name = "dt_alteracao", nullable = true)
 	private Date dataAlteracao;
 
-	@Column(nullable = true, length = 30)
+	@Column(nullable = true)
 	private List<Consulta> consultas;
 
 	@Column(name = "id_medico", nullable = true)
