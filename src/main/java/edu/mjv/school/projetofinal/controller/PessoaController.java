@@ -13,26 +13,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import edu.mjv.school.projetofinal.model.Cadastro;
-import edu.mjv.school.projetofinal.repository.CadastroRepository;
+import edu.mjv.school.projetofinal.model.Pessoa;
+import edu.mjv.school.projetofinal.repository.PessoaRepository;
 
 @RestController
-@RequestMapping("/cadastros")
-public class CadastroController {
+@RequestMapping("/pessoas")
+public class PessoaController {
 	@Autowired()
-	private CadastroRepository repository;
+	private PessoaRepository repository;
 	
 	@PostMapping()
-	public void gravar(@RequestBody Cadastro cadastro) {
+	public void gravar(@RequestBody Pessoa pessoa) {
 		System.out.println("Gravando registro");
-		System.out.println("cadastro: " + cadastro.getNome());
-		repository.save(cadastro);
+		System.out.println("cadastro: " + pessoa.getNomeCompleto());
+		repository.save(pessoa);
  
 	}
 	@PutMapping()
-	public void alterar(@RequestBody Integer id, Cadastro cadastro) {
+	public void alterar(@RequestBody Integer id, Pessoa pessoa) {
 		System.out.println("Alterando registros");
-		System.out.println(cadastro);
+		System.out.println(pessoa);
 
 	}
 	
@@ -44,13 +44,13 @@ public class CadastroController {
 	}
 	
 	@GetMapping("/filtro")
-	public List<Cadastro> filtrar(@RequestParam("nm") String nome) {
+	public List<Pessoa> filtrar(@RequestParam("nm") String nome) {
 		System.out.println("Listando cadastros pelo nome " + nome);
 		return null;
 	}
 
 	@GetMapping()
-	public List<Cadastro> listar() {
+	public List<Pessoa> listar() {
 		System.out.println("Listando dados");
 		return null;
 		
