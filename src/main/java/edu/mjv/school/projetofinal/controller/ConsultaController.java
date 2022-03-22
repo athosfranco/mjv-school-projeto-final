@@ -13,27 +13,31 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import edu.mjv.school.projetofinal.model.Consulta;
+import edu.mjv.school.projetofinal.model.Medico;
+import edu.mjv.school.projetofinal.model.Paciente;
 import edu.mjv.school.projetofinal.model.Pessoa;
-import edu.mjv.school.projetofinal.repository.PessoaRepository;
+import edu.mjv.school.projetofinal.repository.ConsultaRepository;
+import edu.mjv.school.projetofinal.repository.MedicoRepository;
+import edu.mjv.school.projetofinal.repository.PacienteRepository;
+
 
 @RestController
-@RequestMapping("/pessoas")
-public class PessoaController {
+@RequestMapping("/consulta")
+public class ConsultaController {
 	@Autowired()
-	private PessoaRepository repository;
+	private ConsultaRepository repository;
 	
 	@PostMapping()
-	public void gravar(@RequestBody Pessoa pessoa) {
-		System.out.println("Gravando registro");
-		System.out.println("cadastro: " + pessoa.getNomeCompleto());
-		repository.save(pessoa);
- 
-	}
-	@PutMapping()
-	public void alterar(@RequestBody Integer id, Pessoa pessoa) {
-		System.out.println("Alterando registros");
-		System.out.println(pessoa);
+	public void gravar(@RequestBody Consulta consulta) {
+		System.out.println("Gravando consulta");
+		repository.save(consulta); 
+	}	
 
+	@PutMapping()
+	public void alterar(@RequestBody Integer id, Consulta consulta) {
+		System.out.println("Alterando consulta");
+		System.out.println(consulta);
 	}
 	
 	@DeleteMapping(value = "/{id}")
@@ -44,15 +48,16 @@ public class PessoaController {
 	}
 	
 	@GetMapping("/filtro")
-	public List<Pessoa> filtrar(@RequestParam("nm") String nome) {
-		System.out.println("Listando cadastros pelo nome " + nome);
+	public List<Consulta> filtrar(@RequestParam("nm") String nome) {
+		System.out.println("Listando pacientes pelo motivo " + nome);
 		return null;
 	}
 
 	@GetMapping()
-	public List<Pessoa> listar() {
+	public List<Consulta> listar() {
 		System.out.println("Listando dados");
 		return null;
 		
 	}
+
 }

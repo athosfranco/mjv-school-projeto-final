@@ -1,41 +1,25 @@
 package edu.mjv.school.projetofinal.model;
 
-import java.util.Date;
-import java.util.List;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.Table;
+import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
 
-@Entity
-@Table(name = "tb_pessoa")
+@Embeddable
 public class Pessoa {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_pessoa")
-	private Integer idPessoa;
 
 	@Column(name = "nome_completo", nullable = false, length = 60)
 	private String nomeCompleto;
 
-	@Column(name = "nome_pai", nullable = false, length = 60)
-	private String nomePai;
+	@Column(name = "dt_nascimento", nullable = false)
+	private LocalDate dataNascimento;
 
-	@Column(name = "nome_mae", nullable = false, length = 60)
-	private String nomeMae;
+	@Column(nullable = false, length = 11)
+	private String cpf;
 
-	@Column(name = "cpf", nullable = false, length = 11)
-	private String CPF;
-
-	@Column(name = "rg", nullable = false, length = 10)
-	private String RG;
-
-	@Column(nullable = false, length = 3)
-	private int idade;
+	@Column(nullable = false, length = 10)
+	private String rg;
 
 	@Column(nullable = true, length = 11)
 	private String telefone;
@@ -43,31 +27,18 @@ public class Pessoa {
 	@Column(nullable = true, length = 30)
 	private String email;
 
-	@Column(name = "dt_inclusao", nullable = false)
-	private Date dataInclusao;
+	@Embedded
+	private Endereco endereco;
 
-	@Column(name = "dt_alteracao", nullable = true)
-	private Date dataAlteracao;
-
-	@Column(nullable = true)
-	private List<Consulta> consultas;
-
-	@Column(name = "id_medico", nullable = true)
-	@JoinColumn(name = "tb_medico", referencedColumnName = "id_medico")
-	private Medico medico;
-
-	@Column(name = "id_paciente", nullable = true)
-	@JoinColumn(name = "tb_paciente", referencedColumnName = "id_paciente")
-	private Paciente paciente;
-
+	// ============================================
 	// getters e setters
 
-	public Integer getIdPessoa() {
-		return idPessoa;
+	public LocalDate getDataNascimento() {
+		return dataNascimento;
 	}
 
-	public void setIdPessoa(Integer idPessoa) {
-		this.idPessoa = idPessoa;
+	public void setDataNascimento(LocalDate dataNascimento) {
+		this.dataNascimento = dataNascimento;
 	}
 
 	public String getNomeCompleto() {
@@ -78,44 +49,20 @@ public class Pessoa {
 		this.nomeCompleto = nomeCompleto;
 	}
 
-	public String getNomePai() {
-		return nomePai;
+	public String getCpf() {
+		return cpf;
 	}
 
-	public void setNomePai(String nomePai) {
-		this.nomePai = nomePai;
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
 
-	public String getNomeMae() {
-		return nomeMae;
+	public String getRg() {
+		return rg;
 	}
 
-	public void setNomeMae(String nomeMae) {
-		this.nomeMae = nomeMae;
-	}
-
-	public String getCPF() {
-		return CPF;
-	}
-
-	public void setCPF(String cPF) {
-		CPF = cPF;
-	}
-
-	public String getRG() {
-		return RG;
-	}
-
-	public void setRG(String rG) {
-		RG = rG;
-	}
-
-	public int getIdade() {
-		return idade;
-	}
-
-	public void setIdade(int idade) {
-		this.idade = idade;
+	public void setRg(String rg) {
+		this.rg = rg;
 	}
 
 	public String getTelefone() {
@@ -134,44 +81,12 @@ public class Pessoa {
 		this.email = email;
 	}
 
-	public Date getDataInclusao() {
-		return dataInclusao;
+	public Endereco getEndereco() {
+		return endereco;
 	}
 
-	public void setDataInclusao(Date dataInclusao) {
-		this.dataInclusao = dataInclusao;
-	}
-
-	public Date getDataAlteracao() {
-		return dataAlteracao;
-	}
-
-	public void setDataAlteracao(Date dataAlteracao) {
-		this.dataAlteracao = dataAlteracao;
-	}
-
-	public List<Consulta> getConsultas() {
-		return consultas;
-	}
-
-	public void setConsultas(List<Consulta> consultas) {
-		this.consultas = consultas;
-	}
-
-	public Medico getMedico() {
-		return medico;
-	}
-
-	public void setMedico(Medico medico) {
-		this.medico = medico;
-	}
-
-	public Paciente getPaciente() {
-		return paciente;
-	}
-
-	public void setPaciente(Paciente paciente) {
-		this.paciente = paciente;
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
 	}
 
 }

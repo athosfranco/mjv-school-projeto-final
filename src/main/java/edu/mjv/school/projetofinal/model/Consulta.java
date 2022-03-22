@@ -1,5 +1,6 @@
 package edu.mjv.school.projetofinal.model;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -8,47 +9,47 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "tb_consulta")
 public class Consulta {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_consulta")
 	private Integer idConsulta;
-	
-	@Column(nullable = false, length = 255) 
-	private String motivo;
-	
-	@Column(nullable = false, length = 255) 
-	private String prescricao;
-	
-	@Column(name = "valor_consulta", nullable = false)
-	private double valorConsulta;
-	
-	@Column(name = "dt_consulta", nullable = false)
-	private Date dataConsulta;
-	
-	@Column(name = "dt_inclusao", nullable = false)
-	private Date dataInclusao;
 
-	@Column(name = "dt_alteracao", nullable = true)
-	private Date dataAlteracao;
-	
-	@Column(name = "id_medico", nullable = true)
-	@JoinColumn(name = "tb_medico", referencedColumnName = "id_medico")
+	@ManyToOne
+	@JoinColumn(name = "pac_id", referencedColumnName = "paciente_id")
+	private Paciente paciente;
+
+	@ManyToOne
+	@JoinColumn(name = "med_id", referencedColumnName = "medico_id")
 	private Medico medico;
 
-	@Column(name = "id_paciente", nullable = true)
-	@JoinColumn(name = "tb_paciente", referencedColumnName = "id_paciente")
-	private Paciente paciente;
-	
-	@Column(nullable = false)
-	boolean ativo;
-	
-	//getters e setters
+	@Column(nullable = false, length = 255)
+	private String motivo;
+
+	@Column(nullable = false, length = 255)
+	private String prescricao;
+
+	@Column(name = "valor_consulta", nullable = false)
+	private double valorConsulta;
+
+	@Column(name = "dt_consulta", nullable = false)
+	private LocalDate dataConsulta;
+
+	@Column(name = "dt_inclusao", nullable = false)
+	private LocalDate dataInclusao;
+
+	@Column(name = "dt_alteracao", nullable = true)
+	private LocalDate dataAlteracao;
+
+	// ============================================
+	// getters e setters
 
 	public Integer getIdConsulta() {
 		return idConsulta;
@@ -82,36 +83,28 @@ public class Consulta {
 		this.valorConsulta = valorConsulta;
 	}
 
-	public Date getDataConsulta() {
+	public LocalDate getDataConsulta() {
 		return dataConsulta;
 	}
 
-	public void setDataConsulta(Date dataConsulta) {
+	public void setDataConsulta(LocalDate dataConsulta) {
 		this.dataConsulta = dataConsulta;
 	}
 
-	public Date getDataInclusao() {
+	public LocalDate getDataInclusao() {
 		return dataInclusao;
 	}
 
-	public void setDataInclusao(Date dataInclusao) {
+	public void setDataInclusao(LocalDate dataInclusao) {
 		this.dataInclusao = dataInclusao;
 	}
 
-	public Date getDataAlteracao() {
+	public LocalDate getDataAlteracao() {
 		return dataAlteracao;
 	}
 
-	public void setDataAlteracao(Date dataAlteracao) {
+	public void setDataAlteracao(LocalDate dataAlteracao) {
 		this.dataAlteracao = dataAlteracao;
-	}
-
-	public Medico getMedico() {
-		return medico;
-	}
-
-	public void setMedico(Medico medico) {
-		this.medico = medico;
 	}
 
 	public Paciente getPaciente() {
@@ -122,16 +115,12 @@ public class Consulta {
 		this.paciente = paciente;
 	}
 
-	public boolean isAtivo() {
-		return ativo;
+	public Medico getMedico() {
+		return medico;
 	}
 
-	public void setAtivo(boolean ativo) {
-		this.ativo = ativo;
+	public void setMedico(Medico medico) {
+		this.medico = medico;
 	}
-	
-	
-	
-	
 
 }

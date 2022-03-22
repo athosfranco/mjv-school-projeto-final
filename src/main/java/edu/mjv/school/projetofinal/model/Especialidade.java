@@ -1,34 +1,42 @@
 package edu.mjv.school.projetofinal.model;
 
+import java.time.LocalDate;
+
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-@Entity
 @Table(name = "tb_especialidade")
+@Entity
 public class Especialidade {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_especialidade")
-	private Integer idEspecialidade;
-	
+	private Integer id;
+
 	@Column(nullable = false, length = 20)
 	private String titulo;
-	
-	@Column(nullable = false)
-	boolean ativo;
 
-	//getters & setters
-	public Integer getIdEspecialidade() {
-		return idEspecialidade;
+	@Column(name = "dt_inclusao", nullable = false)
+	private LocalDate dataInclusao;
+
+	@Column(name = "dt_alteracao", nullable = true)
+	private LocalDate dataAlteracao;
+
+	// ============================================
+	// getters e setters
+
+	public Integer getId() {
+		return id;
 	}
 
-	public void setIdEspecialidade(Integer idEspecialidade) {
-		this.idEspecialidade = idEspecialidade;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getTitulo() {
@@ -39,14 +47,22 @@ public class Especialidade {
 		this.titulo = titulo;
 	}
 
-	public boolean isAtivo() {
-		return ativo;
+	public LocalDate getDataInclusao() {
+		return dataInclusao;
 	}
 
-	public void setAtivo(boolean ativo) {
-		this.ativo = ativo;
+	public void setDataInclusao(LocalDate dataInclusao) {
+		this.dataInclusao = dataInclusao;
+	}
+
+	public LocalDate getDataAlteracao() {
+		return dataAlteracao;
+	}
+
+	public void setDataAlteracao(LocalDate dataAlteracao) {
+		this.dataAlteracao = dataAlteracao;
 	}
 	
-
 	
+
 }
