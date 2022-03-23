@@ -23,7 +23,7 @@ import edu.mjv.school.projetofinal.repository.PacienteRepository;
 
 
 @RestController
-@RequestMapping("/consulta")
+@RequestMapping("/consultas")
 public class ConsultaController {
 	@Autowired()
 	private ConsultaRepository repository;
@@ -47,17 +47,27 @@ public class ConsultaController {
 
 	}
 	
-	@GetMapping("/filtro")
-	public List<Consulta> filtrar(@RequestParam("crm") String crm) {
-		System.out.println("Listando pacientes pelo motivo " + crm);
-		return null;
+	@GetMapping("/listarTodos")
+	public List<Consulta> getAllMedico() {
+		List<Consulta> todasConsultas = repository.findAll();
+		for (Consulta consulta : todasConsultas) {
+			System.out.println("ID: " + consulta.getIdConsulta());
+		}
+		return todasConsultas;
 	}
-
-	@GetMapping()
-	public List<Consulta> listar() {
-		System.out.println("Listando dados");
-		return null;
-		
+	
+	@GetMapping("/listarPorMedico")
+	public List<Consulta> getByMedico(@RequestParam("idMedico") int id) {
+		System.out.println("Buscando todas as consultas realizadas pelo médico com o ID #" + id);
+		List<Consulta> todasConsultas = repository.findByMedicoId(id);	
+		return todasConsultas;
+	}
+	
+	@GetMapping("/listarPorPaciente")
+	public List<Consulta> getByPaciente(@RequestParam("idPaciente") int id) {
+		System.out.println("Buscando todas as consultas do paciente com o ID #" + id);
+		List<Consulta> todasConsultas = repository.findByPacienteId(id);	
+		return todasConsultas;
 	}
 
 }

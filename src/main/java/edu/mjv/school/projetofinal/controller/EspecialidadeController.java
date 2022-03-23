@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import edu.mjv.school.projetofinal.model.Consulta;
 import edu.mjv.school.projetofinal.model.Especialidade;
 import edu.mjv.school.projetofinal.model.Medico;
 import edu.mjv.school.projetofinal.model.Paciente;
@@ -23,7 +24,7 @@ import edu.mjv.school.projetofinal.repository.PacienteRepository;
 
 
 @RestController
-@RequestMapping("/especialidade")
+@RequestMapping("/especialidades")
 public class EspecialidadeController {
 	@Autowired()
 	private EspecialidadeRepository repository;
@@ -42,22 +43,18 @@ public class EspecialidadeController {
 	
 	@DeleteMapping(value = "/{id}")
 	public void excluir(@PathVariable("id") Integer id) {
-		System.out.println("Excluindo dados");
-		System.out.println("Id: " + id);
+		Especialidade espPraSerDeletada = repository.findById(id).orElse(null);
+		System.out.println(
+				"Excluindo especialidade: " + espPraSerDeletada.getTitulo() + "(ID: " + id + ")");
+		repository.delete(espPraSerDeletada);
+	}	
 
+	@GetMapping("/listarTodos")
+	public List<Especialidade> getAllEspecialidade() {
+		List<Especialidade> todasEspecialidades = repository.findAll();
+		for (Especialidade especialidade : todasEspecialidades) {
+			System.out.println("ID: " + especialidade.getId());
+		}
+		return todasEspecialidades;
 	}
-	
-	@GetMapping("/filtro")
-	public List<Especialidade> filtrar(@RequestParam("nm") String nome) {
-		System.out.println("Listando especialidades: " + nome);
-		return null;
-	}
-
-	@GetMapping("/listar")
-	public List<Especialidade> listar() {
-		System.out.println("Listando dados");
-		return null;
-		
-	}
-
 }

@@ -1,5 +1,6 @@
 package edu.mjv.school.projetofinal.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -40,21 +41,23 @@ public class Consulta {
 	private String prescricao;
 
 	@Column(name = "valor_consulta", nullable = false)
-	private double valorConsulta;
+	private BigDecimal valorConsulta;
 
-	@Column(name = "dt_consulta", nullable = false)
-	private LocalDate dataConsulta;
+	@Column(name = "dt_consulta")
+	private LocalDateTime dataConsulta;
 
-	@Column(name = "dt_inclusao", nullable = false)
+	@Column(name = "dt_inclusao")
 	private LocalDateTime dataInclusao;
 
-	@Column(name = "dt_alteracao", nullable = true)
+	@Column(name = "dt_alteracao")
 	private LocalDateTime dataAlteracao;
 	
 	@PrePersist
 	protected void onCreate() {
 		if (this.dataInclusao == null)
 			this.dataInclusao = LocalDateTime.now();
+		if (this.dataConsulta == null)
+			this.dataConsulta = LocalDateTime.now();
 	}
 
 	@PreUpdate
@@ -89,19 +92,19 @@ public class Consulta {
 		this.prescricao = prescricao;
 	}
 
-	public double getValorConsulta() {
+	public BigDecimal getValorConsulta() {
 		return valorConsulta;
 	}
 
-	public void setValorConsulta(double valorConsulta) {
+	public void setValorConsulta(BigDecimal valorConsulta) {
 		this.valorConsulta = valorConsulta;
 	}
 
-	public LocalDate getDataConsulta() {
+	public LocalDateTime getDataConsulta() {
 		return dataConsulta;
 	}
 
-	public void setDataConsulta(LocalDate dataConsulta) {
+	public void setDataConsulta(LocalDateTime dataConsulta) {
 		this.dataConsulta = dataConsulta;
 	}
 

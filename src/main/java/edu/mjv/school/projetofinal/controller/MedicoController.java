@@ -1,6 +1,5 @@
 package edu.mjv.school.projetofinal.controller;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,7 @@ import edu.mjv.school.projetofinal.model.Medico;
 import edu.mjv.school.projetofinal.repository.MedicoRepository;
 
 @RestController
-@RequestMapping("/medico")
+@RequestMapping("/medicos")
 public class MedicoController {
 	@Autowired()
 	private MedicoRepository repository;	
