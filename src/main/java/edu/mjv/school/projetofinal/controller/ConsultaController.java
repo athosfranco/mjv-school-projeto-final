@@ -48,8 +48,8 @@ public class ConsultaController {
 	}
 	
 	@GetMapping("/filtro")
-	public List<Consulta> filtrar(@RequestParam("nm") String nome) {
-		System.out.println("Listando pacientes pelo motivo " + nome);
+	public List<Consulta> filtrar(@RequestParam("crm") String crm) {
+		System.out.println("Listando pacientes pelo motivo " + crm);
 		return null;
 	}
 

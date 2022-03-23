@@ -1,7 +1,7 @@
 package edu.mjv.school.projetofinal.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -24,36 +24,77 @@ public class PacienteController {
 	@Autowired()
 	private PacienteRepository repository;
 
+	@GetMapping("/{id}")
+	public Paciente getPacienteById(@PathVariable(value = "id") Integer id) {
+		System.out.println("Buscando paciente com ID: " + id);
+		Paciente paciente = repository.findById(id).orElse(null);
+		return paciente;
+	}
+
+	@GetMapping("/listarPorMatPlanoDeSaude")
+	public List<Paciente> getByCrm(@RequestParam("matricula") String matricula) {
+		System.out.println("Listando pacientes pelo código CRM: " + matricula);
+		List<Paciente> pacientesEncontrados = repository.findByMatriculaPlanoDeSaudeContaining(matricula);
+		return pacientesEncontrados;
+	}
+
+	@GetMapping("/listarPorNome")
+	public List<Paciente> getByName(@RequestParam("nome") String nome) {
+		System.out.println("Listando pacientes pelo nome: " + nome);
+		List<Paciente> pacientesEncontrados = repository.findByPessoaNomeCompletoContaining(nome);
+		return pacientesEncontrados;
+	}
+	
+	@GetMapping("/listarPorCpf")
+	public List<Paciente> getByCpf(@RequestParam("cpf") String cpf) {
+		System.out.println("Listando pacientes pelo CPF: " + cpf);
+		List<Paciente> pacientesEncontrados = repository.findByPessoaCpfContaining(cpf);
+		return pacientesEncontrados;
+	}
+	
+	
+	@GetMapping("/listarTodos")
+	public List<Paciente> getAllPaciente() {
+		List<Paciente> todosPacientes = repository.findAll();
+		for (Paciente paciente : todosPacientes) {
+			System.out.println("ID: " + paciente.getId() + "// Nome: " + paciente.getPessoa().getNomeCompleto());
+		}
+		return todosPacientes;
+	}
+	
 	@PostMapping()
 	public void gravar(@RequestBody Paciente paciente) {
 		System.out.println("Gravando paciente");
 		repository.save(paciente);
 	}
 
-	@PutMapping("/alterarDadosPaciente/{id}")
-	public void alterar(@PathVariable(value = "id") int id, @RequestBody Paciente pacienteNovo) {
-		Optional<Paciente> pacienteAntigo = repository.findById(id);
-		
+	@PutMapping(value = "/{id}")
+	public void alterar(@PathVariable int id, @RequestBody Paciente paciente) {
+		Paciente pacienteAtualizado = repository.findById(id).orElse(null);
+		System.out.println("Alterando paciente");
+		pacienteAtualizado.setMatriculaPlanoDeSaude(paciente.getMatriculaPlanoDeSaude());
+		pacienteAtualizado.setPessoa(paciente.getPessoa());
+
+		repository.save(pacienteAtualizado);
 	}
+	/*
+	@PutMapping(value = "/{id}")
+	public void alterar(@PathVariable int id, @RequestBody Paciente paciente) {
+		Paciente pacienteAtualizado = repository.findById(id).orElse(null);
+		paciente = (Paciente) PersistenceUtils.partialUpdate(pacienteAtualizado, paciente);
+		System.out.println("Alterando paciente");
+		repository.save(paciente);
+	}
+	*/
 
 	@DeleteMapping(value = "/{id}")
 	public void excluir(@PathVariable("id") Integer id) {
-		System.out.println("Excluindo dados");
-		System.out.println("Id: " + id);
-
+		Paciente pacientePraSerDeletado = repository.findById(id).orElse(null);
+		System.out.println(
+				"Excluindo paciente: " + pacientePraSerDeletado.getPessoa().getNomeCompleto() + "(ID: " + id + ")");
+		repository.delete(pacientePraSerDeletado);
 	}
 
-	@GetMapping("/filtro")
-	public List<Paciente> filtrar(@RequestParam("nm") String nome) {
-		System.out.println("Listando pacientes pelo motivo " + nome);
-		return null;
-	}
 
-	@GetMapping("/{id}")
-	public Paciente getPacienteById(@PathVariable(value = "id") Integer id) {
-		System.out.println("Buscando paciente com ID: " + id);
-		Paciente paciente = repository.findById(id).orElse(null);	
-		return paciente;
-	}
 
 }

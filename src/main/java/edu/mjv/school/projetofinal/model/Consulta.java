@@ -1,6 +1,7 @@
 package edu.mjv.school.projetofinal.model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -11,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
 @Entity
@@ -43,10 +46,21 @@ public class Consulta {
 	private LocalDate dataConsulta;
 
 	@Column(name = "dt_inclusao", nullable = false)
-	private LocalDate dataInclusao;
+	private LocalDateTime dataInclusao;
 
 	@Column(name = "dt_alteracao", nullable = true)
-	private LocalDate dataAlteracao;
+	private LocalDateTime dataAlteracao;
+	
+	@PrePersist
+	protected void onCreate() {
+		if (this.dataInclusao == null)
+			this.dataInclusao = LocalDateTime.now();
+	}
+
+	@PreUpdate
+	protected void onUpdate() {
+		this.dataAlteracao = LocalDateTime.now();
+	}
 
 	// ============================================
 	// getters e setters
@@ -91,19 +105,19 @@ public class Consulta {
 		this.dataConsulta = dataConsulta;
 	}
 
-	public LocalDate getDataInclusao() {
+	public LocalDateTime getDataInclusao() {
 		return dataInclusao;
 	}
 
-	public void setDataInclusao(LocalDate dataInclusao) {
+	public void setDataInclusao(LocalDateTime dataInclusao) {
 		this.dataInclusao = dataInclusao;
 	}
 
-	public LocalDate getDataAlteracao() {
+	public LocalDateTime getDataAlteracao() {
 		return dataAlteracao;
 	}
 
-	public void setDataAlteracao(LocalDate dataAlteracao) {
+	public void setDataAlteracao(LocalDateTime dataAlteracao) {
 		this.dataAlteracao = dataAlteracao;
 	}
 
