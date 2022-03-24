@@ -3,13 +3,13 @@
 </p>
 <h1 align="center">MJV Clinic - Projeto Final da MJV School Java</h1>
 
-## Introdução
+## 🐣 Introdução
 Neste repositório está armazenado o código-fonte do Projeto Final desenvolvido para a MJV School Java.
 
 O Projeto Final consiste em considerarmos um contexto hipotético (criado pelo próprio aluno) para aplicar o conhecimento adquirido durante a School. 
 
 
-## Contexto 
+## 💭 Contexto 
 <p align="center">"Somos uma pequena clínica privada localizada no interior de São Paulo e queremos um sistema simples para gerenciar e manipular os cadastros dos nossos pacientes, médicos e consultas realizadas."</p>
 
 ## ✅ Objetivo
