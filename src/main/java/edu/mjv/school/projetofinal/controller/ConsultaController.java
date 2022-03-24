@@ -53,8 +53,10 @@ public class ConsultaController {
 
 	@DeleteMapping(value = "/{id}")
 	public void excluir(@PathVariable("id") Integer id) {
-		System.out.println("Excluindo dados");
-		System.out.println("Id: " + id);
+		Consulta consultaDeletada = repository.findById(id).orElse(null);
+		System.out.println(
+				"Excluindo consulta");
+		repository.delete(consultaDeletada);
 	}
 
 	@GetMapping("/listarTodos")
