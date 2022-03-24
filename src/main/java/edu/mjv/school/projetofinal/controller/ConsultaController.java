@@ -38,17 +38,23 @@ public class ConsultaController {
 		return consulta;
 	}
 
-	@PutMapping()
-	public void alterar(@RequestBody Integer id, Consulta consulta) {
+	@PutMapping(value = "/{id}")
+	public void alterar(@PathVariable int id, @RequestBody Consulta consulta) {
+		Consulta consultaAtualizada = repository.findById(id).orElse(null);
 		System.out.println("Alterando consulta");
-		System.out.println(consulta);
+		consultaAtualizada.setMotivo(consulta.getMotivo());
+		consultaAtualizada.setPrescricao(consulta.getPrescricao());
+		consultaAtualizada.setMedico(consulta.getMedico());
+		consultaAtualizada.setPaciente(consulta.getPaciente());
+		consultaAtualizada.setValorConsulta(consulta.getValorConsulta());
+
+		repository.save(consultaAtualizada);
 	}
 
 	@DeleteMapping(value = "/{id}")
 	public void excluir(@PathVariable("id") Integer id) {
 		System.out.println("Excluindo dados");
 		System.out.println("Id: " + id);
-
 	}
 
 	@GetMapping("/listarTodos")

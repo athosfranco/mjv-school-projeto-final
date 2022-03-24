@@ -85,15 +85,6 @@ public class MedicoController {
 
 		repository.save(medicoAtualizado);
 	}
-	/*
-	@PutMapping(value = "/{id}")
-	public void alterar(@PathVariable int id, @RequestBody Medico medico) {
-		Medico medicoAtualizado = repository.findById(id).orElse(null);
-		medico = (Medico) PersistenceUtils.partialUpdate(medicoAtualizado, medico);
-		System.out.println("Alterando medico");
-		repository.save(medico);
-	}
-	*/
 
 	@DeleteMapping(value = "/{id}")
 	public void excluir(@PathVariable("id") Integer id) {
