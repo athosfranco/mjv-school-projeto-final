@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.mjv.school.projetofinal.model.Consulta;
-
+import edu.mjv.school.projetofinal.model.Medico;
 import edu.mjv.school.projetofinal.repository.ConsultaRepository;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -29,6 +29,13 @@ public class ConsultaController {
 	public void gravar(@RequestBody Consulta consulta) {
 		System.out.println("Gravando consulta");
 		repository.save(consulta);
+	}
+	
+	@GetMapping("/{id}")
+	public Consulta getConsultaById(@PathVariable(value = "id") Integer id) {
+		System.out.println("Buscando consulta com ID: " + id);
+		Consulta consulta = repository.findById(id).orElse(null);
+		return consulta;
 	}
 
 	@PutMapping()
