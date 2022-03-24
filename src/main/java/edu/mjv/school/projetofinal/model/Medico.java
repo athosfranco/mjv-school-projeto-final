@@ -1,6 +1,7 @@
 package edu.mjv.school.projetofinal.model;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -44,12 +45,12 @@ public class Medico {
 	@PrePersist
 	protected void onCreate() {
 		if (this.dataInclusao == null)
-			this.dataInclusao = LocalDateTime.now();
+			this.dataInclusao = LocalDateTime.now(ZoneId.of("America/Sao_Paulo"));
 	}
 
 	@PreUpdate
 	protected void onUpdate() {
-		this.dataAlteracao = LocalDateTime.now();
+		this.dataAlteracao = LocalDateTime.now(ZoneId.of("America/Sao_Paulo"));
 	}
 
 	// ============================================

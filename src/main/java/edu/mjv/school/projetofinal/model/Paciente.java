@@ -1,6 +1,7 @@
 package edu.mjv.school.projetofinal.model;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -36,12 +37,12 @@ public class Paciente {
 	@PrePersist
 	protected void onCreate() {
 		if (this.dataInclusao == null)
-			this.dataInclusao = LocalDateTime.now();
+			this.dataInclusao = LocalDateTime.now(ZoneId.of("America/Sao_Paulo"));
 	}
 
 	@PreUpdate
 	protected void onUpdate() {
-		this.dataAlteracao = LocalDateTime.now();
+		this.dataAlteracao = LocalDateTime.now(ZoneId.of("America/Sao_Paulo"));
 	}
 
 	// ============================================

@@ -3,6 +3,7 @@ package edu.mjv.school.projetofinal.model;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -55,14 +56,14 @@ public class Consulta {
 	@PrePersist
 	protected void onCreate() {
 		if (this.dataInclusao == null)
-			this.dataInclusao = LocalDateTime.now();
+			this.dataInclusao = LocalDateTime.now(ZoneId.of("America/Sao_Paulo"));
 		if (this.dataConsulta == null)
-			this.dataConsulta = LocalDateTime.now();
+			this.dataConsulta = LocalDateTime.now(ZoneId.of("America/Sao_Paulo"));
 	}
 
 	@PreUpdate
 	protected void onUpdate() {
-		this.dataAlteracao = LocalDateTime.now();
+		this.dataAlteracao = LocalDateTime.now(ZoneId.of("America/Sao_Paulo"));
 	}
 
 	// ============================================
