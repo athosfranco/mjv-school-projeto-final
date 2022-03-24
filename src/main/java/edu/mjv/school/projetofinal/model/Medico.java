@@ -35,10 +35,10 @@ public class Medico {
 	@JoinColumn(name = "medico_id")
 	private List<Especialidade> especialidades;
 
-	@Column(name = "dt_inclusao", nullable = false)
+	@Column(name = "dt_inclusao")
 	private LocalDateTime dataInclusao;
 
-	@Column(name = "dt_alteracao", nullable = true)
+	@Column(name = "dt_alteracao")
 	private LocalDateTime dataAlteracao;
 
 	@PrePersist
