@@ -33,7 +33,8 @@ O projeto foi desenvolvido em Java, utilizando Spring Boot framework. Foi utiliz
 - Spring Boot
 - Spring Data JPA
 - PostgreSQL
-- Astah
+- Astah Community
+- Eclipse IDE
 
 ## 🚀 Como utilizar
 
